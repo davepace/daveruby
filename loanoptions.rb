@@ -34,25 +34,22 @@ while line = gets
   i+=1
 end
 
-puts "Before Interest"
-i = 0
-while i < 5
-  puts loans[i]
+i = 1
+total_paid = 0
+while (loans[0].balance > 0) || (loans[1].balance > 0) || (loans[2].balance > 0) || (loans[3].balance > 0) || (loans[4].balance > 0)  do
+  puts "Month #{i.to_s}:"
+  j = 0
+  while j < 5
+    puts "Loan #{(j+1).to_s} Starting Balance - #{loans[j]}"
+    loans[j].compute_interest
+    puts "Loan #{(j+1).to_s} After Interest - #{loans[j]}"
+    loans[j].make_payment(100)
+    total_paid+=100
+    puts "Loan #{(j+1).to_s} After Payment - #{loans[j]}"
+    j+=1
+  end
   i+=1
 end
 
-puts "After Interest"
-i = 0
-while i < 5
-  loans[i].compute_interest
-  puts loans[i]
-  i+=1
-end
+puts "Paid $#{total_paid.to_s} over #{i.to_s} months"
 
-puts "After Payment"
-i = 0
-while i < 5
-  loans[i].make_payment(100.00)
-  puts loans[i]
-  i+=1
-end
